@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Random Background</title>
+        <link rel="icon" href="palestine2.jpg">
+    </head>
+    <body>
+        
+        <script>
+            let digits = [0,1,2,3,4,5,6,7,8,9,"A","B","C","D","E","F"] ;
+            let color = [];
+            for(let i=0 ; i<6 ; i++){
+                color.push(digits[Math.floor(Math.random()*(digits.length))])
+            }
+            document.body.append(`#${color.join("")}`)
+            document.body.style.backgroundColor = (`#${color.join("")}`)
+        </script>
+    </body>
+</html>

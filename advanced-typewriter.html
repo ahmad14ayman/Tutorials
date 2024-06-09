@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TypeWriter</title>
+    <link rel="icon" href="palestine2.jpg">
+    <style>
+        body {
+            font-family: sans-serif;
+            min-height: 100vh;
+            background-color: #010718;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            color: #fff;
+            font-size: 30px;
+            width: 300px;
+            text-wrap: nowrap;
+        }
+
+        .text.two {
+            color: #4070f4;
+            position: relative;
+
+            &::before {
+                content: "";
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                top: 0;
+                left: 0;
+                background-color: #010718;
+                border-left: 4px solid #4070f4;
+                animation: tayped 4s steps(12) infinite,
+                flash 0.5s infinite;
+            }
+        }
+
+        @keyframes tayped {
+
+            40%,
+            60% {
+                left: calc(100% + 4px)
+            }
+
+            100% {
+                left: 0%;
+            }
+        }
+        @keyframes flash {
+            from{
+                border-left-color:#4070f4 ;
+            }
+            to{
+                border-left-color:#010718 ;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <span class="text one">I`m a </span>
+        <span class="text two"></span>
+        <script>
+            let textTwo = document.querySelector('.two');
+            let setTxet = () => {
+                setTimeout(() => {
+                    textTwo.textContent = "Student";
+                }, 0)
+                setTimeout(() => {
+                    textTwo.textContent = "Devoloper";
+                }, 4000)
+                setTimeout(() => {
+                    textTwo.textContent = "Programmer";
+                }, 8000)
+                setTimeout(() => {
+                    textTwo.textContent = "Designer";
+                }, 12000)
+            };
+            setTxet();
+            setInterval(setTxet,16000)
+        </script>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Element</title>
+    <link rel="icon" href="palestine2.jpg">
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        user-select: none;
+    }
+
+</style>
+
+<body>
+    <script>
+        let arr = ["Ahmad","Saif","Taha","Bassant","Ehab"];
+        for(let i = 1 ; i<=arr.length ; i++){
+            let randomRange = Math.floor(Math.random()*arr.length);
+            console.log(arr[randomRange])
+        }
+    </script>
+</body>
+
+</html>

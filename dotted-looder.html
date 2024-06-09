@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="palestine2.jpg">
+    <title>Doteded Loader</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+        }
+
+        body,
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 200px;
+            height: 200px;
+            border: 2px #0075ff;
+            border-style: solid solid dotted dotted;
+            border-radius: 50%;
+            animation: rotatePos 2s linear  infinite ;
+
+            .inner-container {
+                width: 150px;
+                height: 150px;
+                border: 2px red;
+                border-style: solid dotted;
+                border-radius: 50%;
+                animation: rotateNeg 1s linear  infinite ;
+            }
+        }
+        @keyframes rotatePos {
+            to{
+                transform: rotate(360deg);
+            }
+        }
+        @keyframes rotateNeg {
+            to{
+                transform: rotate(-360deg);
+                /* transform: rotate(-720deg);*/  /*time is the same of parent */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="inner-container"></div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customize Radio</title>
+    <link rel="icon" href="palestine2.jpg">
+    <style>
+        body {
+            font-family: sans-serif;
+            box-sizing: border-box;
+        }
+
+        form {
+            width: 400px;
+            background-color: #eee;
+            padding: 10px;
+            margin: 100px auto;
+        }
+
+        div:not(:last-child) {
+            margin-bottom: 10px;
+        }
+
+        input[type="radio"] {
+            appearance: none;
+        }
+
+        label {
+            position: relative;
+            margin-bottom: 90px;
+            padding-left: 25px;
+        }
+
+        label::before {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            background-color: white;
+            border: 1px solid #0075ff;
+            box-sizing: border-box;
+        }
+
+        input[type="radio"]:checked+label:after, 
+        input[type="radio"]:not(:checked):hover +label:after 
+        {
+            content: "";
+            position: absolute;
+            left: 4px;
+            top: 3px;
+            background-color: #0075ff;
+            width: 12px;
+            height: 12px;
+            transition: 0.5s;
+        }
+        input[type="radio"]:not(:checked):hover +label:after {
+            opacity: 0.2;
+        }
+    </style>
+</head>
+
+<body>
+    <form>
+        <div>
+            <input type="radio" name="os" id="wind" checked>
+            <label for="wind">Windows</label>
+        </div>
+        <div>
+            <input type="radio" name="os" id="linx">
+            <label for="linx">Linux</label>
+        </div>
+        <div>
+            <input type="radio" name="os" id="mac">
+            <label for="mac">Mac</label>
+        </div>
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll Button</title>
+    <link rel="stylesheet" href="all.min.css">
+    <link rel="icon" href="palestine2.jpg">
+    <style>
+        :root {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            height: 5000px;
+        }
+
+        span {
+            position: fixed;
+            right: 30px;
+            bottom: 30px;
+            width: 40px;
+            height: 40px;
+            background-color: #0075ff;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: 0.5s;
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <span><i class="fa-solid fa-angle-up"></i></span>
+    <script>
+        let upButton = document.querySelector("span");
+        window.onscroll = () => {
+            if (scrollY >= 1000) {
+                upButton.style.opacity = "1";
+            }
+            else
+                upButton.style.opacity = "0";
+        }
+        upButton.onclick = () => {
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Increase Numbers on Scroll</title>
+    <link rel="icon" href="palestine2.jpg">
+    <style>
+        .top {
+            height: 200vh;
+            background-color: black;
+        }
+
+        .bottom {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            & .container {
+                display: flex;
+
+                div {
+                    padding: 10px;
+                    font-size: 30px;
+                    font-weight: bold;
+                    border: 1px solid #0077ff;
+                }
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top">
+
+    </div>
+    <div class="bottom">
+        <div class="container">
+            <div data-max="100">0</div>
+            <div data-max="200">0</div>
+            <div data-max="300">0</div>
+            <div data-max="500">0</div>
+            <div data-max="250">0</div>
+        </div>
+    </div>
+    <div class="top"></div>
+    <script>
+        let bottom = document.querySelector(".bottom");
+        let divs = document.querySelectorAll(".container > div");
+        let start = false;
+
+        window.onscroll = () => {
+            if (window.scrollY >= bottom.offsetTop) {
+                if (!start) {
+                    divs.forEach((div) => {
+                        timer(div);
+                    })
+                }
+                start = true;
+            }
+        }
+
+        function timer(el) {
+            let goal = el.dataset.max;
+            let counter = setInterval(function () {
+                el.textContent++;
+                if (el.textContent == goal)
+                    clearInterval(counter)
+            }, 4000 / goal)
+        }
+    </script>
+</body>
+
+</html>

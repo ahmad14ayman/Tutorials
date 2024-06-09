@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burger Icon</title>
+    <link rel="icon" href="palestine2.jpg">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .burger-icon {
+            height: 20px;
+            width: 30px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .burger-icon span {
+            background-color: black;
+            height: 3px;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            transition: all 0.3s ease;
+        }
+        .burger-icon span:first-child{
+            top: 0;
+        }
+        .burger-icon span:nth-child(2){
+            top: 8.5px;
+        }
+        .burger-icon span:last-child{
+            top: 17px;
+        }
+        .burger-icon-x span:nth-child(2){
+            opacity: 0;
+        }
+        .burger-icon-x span:is(:first-child,:last-child){
+            top: 8.5px;
+        }
+        .burger-icon-x span:first-child{
+            background-color: red;
+            transform: rotate(45deg);
+        }
+        .burger-icon-x span:last-child{
+            background-color: red;
+            transform: rotate(-45deg);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="list burger-icon">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <script>
+        let list = document.querySelector(".list");
+        list.addEventListener("click",()=>{
+            // list.classList.toggle(("burger-icon"));
+            list.classList.toggle("burger-icon-x");
+        });
+    </script>
+</body>
+
+</html>

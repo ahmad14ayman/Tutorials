@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency_API</title>
+    <link rel="icon" href="palestine2.jpg">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            user-select: none;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        *:focus {
+            outline: none;
+        }
+
+        input,
+        button {
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .flex {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .flex-between {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .gap-20 {
+            gap: 20px;
+        }
+
+        .full-width {
+            width: 100%;
+        }
+
+        .container {
+            flex-direction: column;
+            width: 400px;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: #eee;
+        }
+
+        .mt-10 {
+            margin-top: 10px;
+        }
+
+        button {
+            background-color: red;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .output {
+            margin-top: 20px;
+            width: fit-content;
+            background-color: #eee;
+            padding: 10px;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .searchBar {
+            position: absolute;
+            top: 50px;
+            right: 20px;
+            background-color: white;
+            padding: 5px;
+            border-radius: 10px;
+            height: 40px;
+            width: 100px;
+            overflow: auto;
+            box-shadow: 0 0 2px black;
+            opacity: 0;
+            transition: 0.6s;
+
+            span {
+                height: 18px;
+                display: block;
+                background-color: #eee;
+                border-radius: inherit;
+                text-align: center;
+                font-size: 14px;
+                margin-bottom: 2px;
+            }
+        }
+
+        .p-relative {
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container flex">
+        <h1>Currency Switch</h1>
+        <div class="amount flex-between full-width mt-10">
+            <label for="amount">Enter The Amount in $</label >
+            <input type="text" name="amount" id="amount" placeholder="100$" autocomplete="off">
+        </div>
+        <div class="curr flex-between full-width mt-10 p-relative">
+            <label for="currency">Enter The Currency</label>
+            <input type="text" name="currency" id="currency" placeholder="EGP" autocomplete="off">
+            <div class="searchBar">
+
+            </div>
+        </div>
+        <button class="mt-10" type="button">Convert</button>
+    </div>
+    <div class="output flex-between gap-20">
+        <div>
+            <span>The Currency at </span>
+            <span class="curr-date">.....</span>
+        </div>
+        <div>
+            <span>the ammount Is : </span>
+            <span class="curr-output">...</span>
+        </div>
+    </div>
+
+    <script>
+
+        let amountInput = document.getElementsByName("amount")[0];
+        let currencyInput = document.getElementsByName("currency")[0];
+        let currencyDate = document.getElementsByClassName("curr-date")[0];
+        let currencyOutput = document.getElementsByClassName("curr-output")[0];
+        let convertButton = document.querySelector("button");
+        let searchBar = document.querySelector(".searchBar");
+
+        currencyInput.onfocus = function () {
+            searchBar.style.opacity = 1;
+        }
+        currencyInput.onblur = function () {
+            searchBar.style.opacity = 0;
+        }
+
+        fetch('https://api.currencyfreaks.com/v2.0/rates/latest?apikey=8ac42faf77c6426cb8a3aaf7ba7692d9')
+            .then((res) => res.json())
+            .then((currenc) => {
+                let keys = Object.keys(currenc.rates);
+                for (let i = 0; i < keys.length; i++) {
+                    let span = document.createElement("span");
+                    span.textContent = keys[i];
+                    searchBar.appendChild(span)
+                }
+                let spans = searchBar.children;
+                currencyInput.oninput = function () {
+                    for (let i = 0; i < spans.length; i++) {
+                        if (spans[i].textContent.startsWith(currencyInput.value.toUpperCase()))
+                            spans[i].style.display = "block";
+                        else
+                            spans[i].style.display = "none";
+
+                    };
+                }
+            })
+
+
+
+        convertButton.onclick = () => {
+            let amountInputValue = amountInput.value.trim();
+            let currencyInputValue = currencyInput.value.trim();
+            if (amountInputValue && currencyInputValue) {
+                fetch('https://api.currencyfreaks.com/v2.0/rates/latest?apikey=8ac42faf77c6426cb8a3aaf7ba7692d9')
+                    .then((res) => res.json())
+                    .then((currenc) => {
+                        currencyDate.textContent = currenc['date'].split(" ")[0];
+                        currencyOutput.textContent = Math.floor(currenc['rates'][currencyInputValue.toUpperCase()] * amountInputValue);
+                    })
+            }
+        }
+    </script>
+</body>
+
+</html>

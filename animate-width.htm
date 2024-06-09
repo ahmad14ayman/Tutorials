@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animate-Width</title>
+    <link rel="icon" href="palestine2.jpg">
+    <style>
+        .top {
+            margin: 0;
+            height: 5000px;
+        }
+
+        .container {
+            width: 500px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: auto;
+            background-color: #eee;
+        }
+
+        .container .box {
+            width: 100%;
+            padding: 10px 0;
+            border: 1px solid #ddd;
+            position: relative;
+        }
+
+        .container .box span {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: block;
+            height: 100%;
+            background-color: #0075ff;
+            width: 0;
+            transition: width 0.5s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top">
+
+    </div>
+    <div class="container">
+        <div class="box">
+            <span  data-width="75%"></span>
+        </div>
+        <div class="box" >
+            <span data-width="88%"></span>
+        </div>
+        <div class="box" >
+            <span data-width="99%"></span>
+        </div>
+    </div>
+    <div class="top">
+
+    </div>
+    <script>
+        let container = document.querySelector('.container');
+        let spans = document.querySelectorAll('span');
+        window.onscroll = function(){
+            if (window.scrollY >= container.offsetTop - 100){
+                spans.forEach((span)=>{
+            span.style.width = span.dataset.width;
+        })
+            }
+        }
+    </script>
+</body>
+
+</html>

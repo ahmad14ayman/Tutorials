@@ -1,0 +1,181 @@
+<!-- I Use js & flex &local storage-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work Filter</title>
+    <link rel="icon" href="palestine2.jpg">
+    <style>
+        @font-face {
+            font-family: 'Roboto';
+            src: url(Fonts/Roboto/Roboto-Regular.ttf);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto';
+            user-select: none;
+        }
+
+        .container {
+            margin: auto;
+            width: 500px;
+            padding: 10px;
+            border-radius: 3px;
+            box-shadow: 0 0 10px 2px #eee;
+        }
+
+        .cats {
+            display: flex;
+            list-style: none;
+            margin: auto;
+            padding: 0;
+            width: fit-content;
+        }
+
+        .cats li {
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background-color 0.5s;
+            border-radius: 3px;
+        }
+
+        .cats li.active,
+        .cats li:hover {
+            color: #fff;
+        }
+
+        .cats li.all.active,
+        .cats li.all:hover {
+            background-color: #F44336;
+            color: #fff;
+        }
+
+        .cats-list {
+            width: 100%;
+            margin-top: 30px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .cats-list>div {
+            border: 1px solid #ddd;
+            flex-basis: calc((100% - 12px*3)/4);
+            text-align: center;
+            font-size: 20px;
+            padding: 20px 10px;
+            color: #fff;
+            border-radius: 3px;
+        }
+
+        .cats-list>div.music,
+        .cats li.music.active,
+        .cats li.music:hover {
+            background-color: #9C27B0;
+        }
+
+        .cats-list>div.photos,
+        .cats li.photos.active,
+        .cats li.photos:hover {
+            background-color: #673AB7;
+        }
+
+        .cats-list>div.files,
+        .cats li.files.active,
+        .cats li.files:hover {
+            background-color: #2196F3;
+        }
+
+        .cats-list>div.videos,
+        .cats li.videos.active,
+        .cats li.videos:hover {
+            background-color: #607D8B;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <ul class="cats">
+            <li class="all active" data-cat="all">All</li>
+            <li class="music" data-cat="music">Music</li>
+            <li class="photos" data-cat="photos">Photos</li>
+            <li class="files" data-cat="files">Files</li>
+            <li class="videos" data-cat="videos">Videos</li>
+        </ul>
+        <div class="cats-list">
+            <div class="all music">Music</div>
+            <div class="all music">Music</div>
+            <div class="all music">Music</div>
+            <div class="all music">Music</div>
+            <div class="all photos">Photos</div>
+            <div class="all photos">Photos</div>
+            <div class="all videos">Videos</div>
+            <div class="all photos">Photos</div>
+            <div class="all photos">Photos</div>
+            <div class="all music">Music</div>
+            <div class="all files">Files</div>
+            <div class="all files">Files</div>
+            <div class="all files">Files</div>
+            <div class="all photos">Photos</div>
+            <div class="all photos">Photos</div>
+            <div class="all photos">Photos</div>
+            <div class="all files">Files</div>
+            <div class="all photos">Photos</div>
+            <div class="all files">Files</div>
+            <div class="all files">Files</div>
+            <div class="all music">Music</div>
+            <div class="all videos">Videos</div>
+            <div class="all videos">Videos</div>
+            <div class="all videos">Videos</div>
+        </div>
+    </div>
+    <script>
+        let catsList = document.querySelectorAll("ul.cats>li");
+        let catsItems = document.querySelectorAll(".cats-list>div");
+        // Part Of LocalStorage
+        catsList.forEach((catWind) => {
+            if (window.localStorage.activeList == catWind.dataset.cat) {
+                catsList.forEach((cat) => {
+                    cat.classList.remove("active");
+                });
+                catWind.classList.add("active");
+                catsItems.forEach((item) => {
+                    if (item.classList.contains(catWind.dataset.cat)) {
+                        item.style.display = "block";
+                    } else {
+                        item.style.display = "none";
+                    }
+                })
+            }
+        })
+
+        // Part Of Click
+        catsList.forEach((cat) => {
+            cat.onclick = function () {
+                catsList.forEach((cat2) => {
+                    cat2.classList.remove("active");
+                });
+                cat.classList.add("active");
+                window.localStorage.activeList = cat.dataset.cat;
+                // console.log(cat.classList)
+                // console.log(cat.dataset.cat)
+                catsItems.forEach((item) => {
+                    if (item.classList.contains(cat.dataset.cat)) {
+                        item.style.display = "block";
+                    } else {
+                        item.style.display = "none";
+                    }
+                })
+            };
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PageScroll_Progress</title>
+    <link rel="icon" href="palestine2.jpg">
+    <style>
+        body {
+            height: 1000px;
+            position: relative;
+            margin: 0;
+        }
+
+        div {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 5px;
+            background-color: #0075ff;
+            width: 0%;
+            transition: 0.5s;
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+    <script>
+        let div = document.querySelector("div")
+        window.onscroll = ()=>{
+            let scrollHeight = document.documentElement.scrollHeight;
+            let clientHeight = document.documentElement.clientHeight;
+            let height = scrollHeight-clientHeight ;
+            let sY = ((window.scrollY) / height)*100;
+            console.log(sY)
+            div.style.width = `${sY}%` ;
+        }
+    </script>
+</body>
+
+</html>

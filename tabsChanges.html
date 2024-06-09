@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tabsChange</title>
+    <link rel="icon" href="palestine2.jpg">
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        user-select: none;
+    }
+
+    .tabes {
+        margin: 100px auto;
+        width: fit-content;
+    }
+
+    ul {
+        display: flex;
+        list-style: none;
+    }
+
+    ul li {
+        padding: 20px;
+        cursor: pointer;
+        background-color: #f9f9f9;
+        border-right: 1px solid white;
+        transition: 0.5s;
+
+    }
+
+    ul li.activeList,
+    ul li:hover {
+        background-color: #eee;
+    }
+
+    .tables {
+        width: 500px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .tables>div {
+        padding: 20px;
+        background-color: #eee;
+    }
+
+    .tables>div:not(.active) {
+        display: none;
+    }
+</style>
+
+<body>
+    <div class="tabes">
+        <ul>
+            <li class="" data-cont="tab1">table one</li>
+            <li data-cont="tab2">table Two</li>
+            <li data-cont="tab3">table three</li>
+        </ul>
+        <div class="tables">
+            <div class="tab1" data-tabs="tab1">
+                Content 1
+            </div>
+            <div class="tab2" data-tabs="tab2">
+                Content 2
+            </div>
+            <div class="tab3" data-tabs="tab3">
+                Content 3
+            </div>
+        </div>
+    </div>
+    <script>
+        let lists = document.querySelectorAll("ul li");
+        let tabs = document.querySelectorAll(".tables > div")
+        // LocalStorage
+        lists.forEach((list) => {
+            if (window.localStorage.currentTab) {
+                if (list.dataset.cont === (window.localStorage.currentTab)) {
+                    list.classList.add("activeList")
+                }
+            }
+        });
+        tabs.forEach((tab) => {
+            if (window.localStorage.currentDiv) {
+                if (tab.dataset.tabs === (window.localStorage.currentDiv)) {
+                    tab.classList.add("active")
+                }
+            }
+        });
+
+        lists.forEach((list) => {
+            list.onclick = function (event) {
+                lists.forEach((el) => {
+                    el.classList.remove("activeList")
+                });
+                list.classList.add("activeList");
+                let currentClass = event.target.dataset.cont;
+                window.localStorage.currentTab = currentClass;
+
+                tabs.forEach((tab) => {
+                    tab.classList.remove("active");
+                    if (tab.classList.contains(currentClass)) {
+                        tab.classList.add("active")
+                        window.localStorage.currentDiv = tab.dataset.tabs;
+                    }
+                })
+
+            };
+        });
+
+
+
+    </script>
+</body>
+
+</html>
